@@ -8,9 +8,10 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
     "strict": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "resolveJsonModule": true,
     "skipLibCheck": true
   },
-  "include": ["./"]
+  "include": ["server.ts"]
+
 }
