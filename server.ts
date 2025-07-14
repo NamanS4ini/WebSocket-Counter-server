@@ -2,13 +2,23 @@ import { Server } from "socket.io";
 import express from "express";
 import { createServer } from "node:http";
 import dotenv from "dotenv";
-import connectDB from "./db";
-import { Counter } from "./models/Counter";
+import connectDB from "./db.js";
+import { Counter } from "./models/Counter.js";
 dotenv.config();
 
 (async () => {
   await connectDB();
   const app = express();
+
+  // Health check endpoint
+  app.get("/health", (req, res) => {
+    res.status(200).json({
+      status: "OK",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+    });
+  });
+
   const server = createServer(app);
 
   const io = new Server(server, {
